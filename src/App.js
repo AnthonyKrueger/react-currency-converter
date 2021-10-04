@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.scss';
+import Select from 'react-select'
 
 function App() {
+
+  const options = [
+    { value: 'usd', label: 'USD'}
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="content">
+        <h2 className="title">Currency Converter</h2>
+        <div className="convertor">
+          <Select options={options} />
+        </div>
+      </div>
     </div>
   );
 }
