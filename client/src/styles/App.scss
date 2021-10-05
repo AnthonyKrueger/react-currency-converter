@@ -1,0 +1,76 @@
+@import './colors';
+
+@mixin center-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin roundeddiv() {
+    @include center-flex;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+$phone: 576px;
+$tablet: 768px;
+$laptop: 992px;
+$desktop: 1200px;
+
+body {
+    background-color: $main;
+}
+
+.content {
+
+    @include center-flex;
+
+    .title {
+        font-size: 40px;
+        color: $pink;
+        @media (max-width: $laptop) {
+            font-size: 4vw;
+        }
+        @media (max-width: $tablet) {
+            font-size: 5vw;
+        }
+        @media (max-width: $phone) {
+            font-size: 6vw;
+        }
+    }
+
+    .convertor {
+        @include roundeddiv;
+        padding: 30px;
+        background-color: $mainlight;
+        box-shadow: 3px 3px 5px;
+
+        .inputsDiv {
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+
+            input {
+                background-color: $main;
+                border-radius: 5px;
+                font-size: 20px;
+                color: $green;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+
+            .swapButton {
+                transition: 0.3s;
+                color: $main;
+                font-size: 40px;
+                padding: 10px;
+                margin: 10px 30px;
+            }
+
+            .swapButton:hover {
+                color: $green;
+            }
+        }
+    }
+}
