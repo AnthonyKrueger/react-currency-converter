@@ -24,6 +24,8 @@ body {
 
 .content {
 
+    margin-top: 50px;
+
     @include center-flex;
 
     .title {
@@ -66,10 +68,18 @@ body {
                 font-size: 40px;
                 padding: 10px;
                 margin: 10px 30px;
+                @media (max-width: $tablet) {
+                    margin: auto;
+                    padding: 20px;
+                }
             }
 
             .swapButton:hover {
                 color: $green;
+            }
+
+            @media (max-width: $tablet) {
+                flex-direction: column;
             }
         }
     }

@@ -69,17 +69,17 @@ function App() {
     })
   };
 
-  function handleCurrencyChange(currency, inputNum) {
+  function handleCurrencyChange(currency, inputNum, value) {
     if(inputNum === 1) {
       setCurrencyOne(currency)
       if(currencyOne && currencyTwo) {
-        setValueTwo((valueOne / conversionRates[currency.value]) * conversionRates[currencyTwo.value])
+        handleInputChange(value, 1)
       }
     }
     else {
       setCurrencyTwo(currency)
       if(currencyOne && currencyTwo) {
-        setValueOne((valueTwo / conversionRates[currency.value]) * conversionRates[currencyOne.value])
+        handleInputChange(value, 2)
       }
     }
   }
@@ -88,13 +88,15 @@ function App() {
     if(inputNum === 1) {
       setValueOne(value)
       if(currencyOne && currencyTwo) {
-        setValueTwo((value / conversionRates[currencyOne.value]) * conversionRates[currencyTwo.value])
+        const newValue = (value / conversionRates[currencyOne.value]) * conversionRates[currencyTwo.value]
+        setValueTwo(Math.round(newValue * 100) / 100)
       }
     }
     else {
       setValueTwo(value)
       if(currencyOne && currencyTwo) {
-        setValueOne((value / conversionRates[currencyTwo.value]) * conversionRates[currencyOne.value])
+        const newValue = (value / conversionRates[currencyTwo.value]) * conversionRates[currencyOne.value]
+        setValueOne(Math.round(newValue * 100) / 100)
       }
     }
   }
@@ -121,7 +123,7 @@ function App() {
               <Select 
               defaultValue={"USD"}
               value={currencyOne}
-              onChange={(val) => handleCurrencyChange(val, 1)}
+              onChange={(val) => handleCurrencyChange(val, 1, valueOne)}
               options={options}
               styles={styles} />
             </div>
@@ -133,7 +135,7 @@ function App() {
               <Select
               defaultValue={"USD"}
               value={currencyTwo}
-              onChange={(val) => handleCurrencyChange(val, 2)}
+              onChange={(val) => handleCurrencyChange(val, 2, valueTwo)}
               options={options}
               styles={styles} />
             </div>
