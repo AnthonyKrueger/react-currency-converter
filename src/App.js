@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     let loadedRates = localStorage.getItem("conversionrates")
     loadedRates = JSON.parse(loadedRates);
-    console.log(loadedRates)
     if(!loadedRates || loadedRates.lastUpdated < (Date.now() - 86400000)) {
       axios.get(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`)
       .then(res => {
@@ -46,14 +45,13 @@ function App() {
       "/"+date.getFullYear())
       setLastUpdated(dateString)
       const currencyOptions = Object.keys(loadedRates.rates)
-      console.log(currencyOptions)
       currencyOptions.forEach(option => {
         const newOptions = options
         newOptions.push({value: option, label: option})
         setOptions(newOptions)
       })
     }
-  }, [])
+  }, [options])
 
   const styles = {
     control: provided => ({...provided, backgroundColor: "#282a36", color: "#ffb86c"}),
@@ -83,13 +81,17 @@ function App() {
     if(inputNum === 1) {
       setCurrencyOne(currency)
       if(currencyOne && currencyTwo) {
-        handleInputChange(value, 1)
+        if(currencyOne && currencyTwo) {
+          const newValue = (value / conversionRates[currency.value]) * conversionRates[currencyTwo.value]
+          setValueTwo(Math.round(newValue * 100) / 100)
+        }
       }
     }
     else {
       setCurrencyTwo(currency)
       if(currencyOne && currencyTwo) {
-        handleInputChange(value, 2)
+        const newValue = (value / conversionRates[currency.value]) * conversionRates[currencyOne.value]
+        setValueOne(Math.round(newValue * 100) / 100)
       }
     }
   }
