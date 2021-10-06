@@ -4,6 +4,8 @@ import {useState, useEffect} from 'react';
 import Select from 'react-select'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import {FaGithub, FaLinkedin} from 'react-icons/fa'
+import {RiPassportLine} from 'react-icons/ri'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -15,6 +17,8 @@ function App() {
   const [valueOne, setValueOne] = useState(0)
   const [valueTwo, setValueTwo] = useState(0)
 
+  const [lastUpdated, setLastUpdated] = useState("")
+
   const [conversionRates, setConversionRates] = useState(null);
   const [options, setOptions] = useState([]);
 
@@ -22,19 +26,25 @@ function App() {
     let loadedRates = localStorage.getItem("conversionrates")
     loadedRates = JSON.parse(loadedRates);
     console.log(loadedRates)
-    if(!loadedRates) {
+    if(!loadedRates || loadedRates.lastUpdated < (Date.now() - 86400000)) {
       axios.get(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`)
       .then(res => {
         const conversionrates = {
           lastUpdated: Date.now(),
           rates: res.data.conversion_rates
         }
+        setLastUpdated(Date.now())
         localStorage.setItem("conversionrates", JSON.stringify(conversionrates))
         setConversionRates(res.data.conversion_rates)
       })
     }
     else {
       setConversionRates(loadedRates.rates)
+      const date = new Date(loadedRates.lastUpdated)
+      const dateString = ((date.getMonth()+1)+
+      "/"+date.getDate()+
+      "/"+date.getFullYear())
+      setLastUpdated(dateString)
       const currencyOptions = Object.keys(loadedRates.rates)
       console.log(currencyOptions)
       currencyOptions.forEach(option => {
@@ -140,7 +150,19 @@ function App() {
               styles={styles} />
             </div>
           </div>
+          {lastUpdated ? 
+          <div className="updatedDiv">
+            <span>Last Updated: {lastUpdated}</span>
+          </div>
+          : null}
         </div>
+      </div>
+      <div className="footer">
+      <div className="links">
+        <a target="_blank" rel="noreferrer" href="https://github.com/AnthonyKrueger"><FaGithub /></a>
+        <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/anthony-krueger-1545a5208/"><FaLinkedin /></a>
+        <a target="_blank" rel="noreferrer" href="https://aik-portfolio.herokuapp.com/"><RiPassportLine /></a>
+      </div>
       </div>
     </div>
   );
