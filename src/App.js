@@ -35,6 +35,7 @@ function App() {
         setLastUpdated(Date.now())
         localStorage.setItem("conversionrates", JSON.stringify(conversionrates))
         setConversionRates(res.data.conversion_rates)
+        window.location.reload();
       })
     }
     else {
@@ -97,21 +98,25 @@ function App() {
   }
 
   function handleInputChange(value, inputNum) {
-    if(inputNum === 1) {
-      setValueOne(value)
-      if(currencyOne && currencyTwo) {
-        const newValue = (value / conversionRates[currencyOne.value]) * conversionRates[currencyTwo.value]
-        setValueTwo(Math.round(newValue * 100) / 100)
+    const re = /^[0-9\b]+$/;
+
+    if (value === '' || re.test(value)) {
+      if(inputNum === 1) {
+        setValueOne(value)
+        if(currencyOne && currencyTwo) {
+          const newValue = (value / conversionRates[currencyOne.value]) * conversionRates[currencyTwo.value]
+          setValueTwo(Math.round(newValue * 100) / 100)
+        }
+      }
+      else {
+        setValueTwo(value)
+        if(currencyOne && currencyTwo) {
+          const newValue = (value / conversionRates[currencyTwo.value]) * conversionRates[currencyOne.value]
+          setValueOne(Math.round(newValue * 100) / 100)
+        }
       }
     }
-    else {
-      setValueTwo(value)
-      if(currencyOne && currencyTwo) {
-        const newValue = (value / conversionRates[currencyTwo.value]) * conversionRates[currencyOne.value]
-        setValueOne(Math.round(newValue * 100) / 100)
-      }
     }
-  }
 
   function swapCurrencies() {
     const tempCurrOne = currencyOne;

@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Currency Convertor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The live version of this app can be found [HERE](http://ak-currencyconverter.herokuapp.com/)
 
-## Available Scripts
+## Description / Usage
 
-In the project directory, you can run:
+This is a simple currency convertor built with ReactJS and SASS for styling. Currencies and their conversion rates are pulled daily for each user from an ExchangeRate API. Due to API limitations, users are limited to 1 update every 24 hours. Changing the currency type or value on either side will update the value of the other. Clicking the button in the middle will swap the values. The 3 icons on the bottom lead to my corresponding profiles. My purpose in building this was to practice my skills building React applications and components using SASS.
 
-### `yarn start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+If you'd like to run the application locally, first you must clone this repo. Once that's complete, simply navigate into the repo's directory and run
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+npm i
+```
 
-### `yarn test`
+to install all necessary dependencies. From there, you'll need an API key from [ExchangeRate-API](https://www.exchangerate-api.com/). Once you have that, you can share your API Key with the application by create a .env file in the root of the project. You'll want the .env file to look like this:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+REACT_APP_API_KEY=[your api key here]
+```
 
-### `yarn build`
+This application runs alone without a server backend, so development from there is as simple as running
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm run start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+and editting the code!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
 
-### `yarn eject`
+Desktop Layout
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Desktop View](readme_assets/cc1.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Mobile Layout
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Mobile View](readme_assets/cc3.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Technologies Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Core: Javascript, ReactJS, NodeJS, CSS, HTML
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Styling: SASS
 
-### Code Splitting
+Libraries: [react-select](https://react-select.com/home)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+API: [ExchangeRate-API](https://www.exchangerate-api.com/)
 
-### Analyzing the Bundle Size
+## Questions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Contact me at my [Github Profile](https://github.com/AnthonyKrueger)
+or my email address: anthonykrueger0@gmail.com
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
