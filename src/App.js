@@ -98,7 +98,7 @@ function App() {
   }
 
   function handleInputChange(value, inputNum) {
-    const re = /^[0-9\b]+$/;
+    const re = /^[0-9]\d{0,9}(\.\d{1,3})?%?$/;
 
     if (value === '' || re.test(value)) {
       if(inputNum === 1) {
